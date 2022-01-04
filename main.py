@@ -6,6 +6,7 @@ import collections
 
 EXCEL_WINE = 'wine3.xlsx'
 
+
 def get_firm_age():
     age = str(datetime.now().year - 1920)
     years = 'год' if age[-1] == '1' else 'года' if '2' <= age[-1] <= '4' else 'лет'
