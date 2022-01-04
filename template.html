@@ -125,7 +125,7 @@
               <div>
                 <h3 class="heading mt-3 mb-3 text-dark">{{w['Название']}}</h3>
                 <p>
-                  {% if w['Сорт'] %}
+                  {% if w['Сорт'].strip()|length %}
                   Сорт винограда - {{w['Сорт']}}<br/>
                   {% endif %}
                   <span class="price">{{w['Цена']|int}} р.</span>
