@@ -114,21 +114,27 @@
           </div>
         </div>
         <div class="row">
-        {% for w in wines %}
+          {% for group,winelist in wines.items() %}
+          <div class="col-12 section-title text-center mb-5">
+            <h2 class="d-block">{{group}}</h2>
+          </div>
+          {% for w in winelist %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
               <img src="images/{{w['Картинка']}}" alt="Image" class="img-fluid">
               <div>
                 <h3 class="heading mt-3 mb-3 text-dark">{{w['Название']}}</h3>
                 <p>
+                  {% if w['Сорт'] %}
                   Сорт винограда - {{w['Сорт']}}<br/>
+                  {% endif %}
                   <span class="price">{{w['Цена']|int}} р.</span>
                 </p>
               </div>
             </div>
           </div>
-        {% endfor %}
-
+          {% endfor %}
+          {% endfor %}
         </div>
       </div>
     </div>
