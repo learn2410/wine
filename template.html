@@ -114,22 +114,22 @@
           </div>
         </div>
         <div class="row">
-          {% for group,winelist in wines.items() %}
+          {% for group, drinks in wines.items() %}
             <div class="col-12 section-title text-center mb-5">
               <h2 class="d-block">{{group}}</h2>
             </div>
-            {% for wine in winelist %}
+            {% for wine in drinks %}
               <div class="col-lg-4 mb-5 col-md-6">
                 <div class="wine_v_1 text-center pb-4 pt-5">
                   <img src="images/{{wine['Картинка']}}" alt="Image" class="img-fluid">
-                  {% if wine["Акция"]|length %}
-                  <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-                  {% endif %}
+                    {% if wine["Акция"]|length %}
+                      <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                    {% endif %}
                   <div>
                     <h3 class="heading mt-3 mb-3 text-dark">{{wine['Название']}}</h3>
                     <p>
                       {% if wine['Сорт']|length %}
-                      Сорт винограда - {{wine['Сорт']}}<br/>
+                        Сорт винограда - {{wine['Сорт']}}<br/>
                       {% endif %}
                       <span class="price">{{wine['Цена']|int}} р.</span>
                     </p>

@@ -4,7 +4,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-PATH_XLSX_WINES = 'wine.xlsx'
+WINES_XLSX_PATH = 'wine.xlsx'
 
 
 def get_firm_age():
@@ -14,11 +14,11 @@ def get_firm_age():
     return f'{age} {years}'
 
 
-def get_group_wines(path_xlsx):
-    wines = pandas.read_excel(path_xlsx, sheet_name='Лист1').fillna('').groupby('Категория')
-    # sort by category - wines to top of list (the wine can be pink, sparkling e.t.c)
-    grouplist = sorted(list(wines.groups), key=lambda k: ' ' + k if ' вина' in k else k)
-    return {n: wines.get_group(n).to_dict(orient='records') for n in grouplist}
+def get_group_wines(xlsx_path):
+    wines = pandas.read_excel(xlsx_path, sheet_name='Лист1').fillna('').groupby('Категория')
+    # цель сортировки - собрать категории с винами в начало словаря
+    kind_wines = sorted(list(wines.groups), key=lambda k: ' ' + k if ' вина' in k else k)
+    return {kind: wines.get_group(kind).to_dict(orient='records') for kind in kind_wines}
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
     template = env.get_template('template.html')
     rendered_page = template.render(
         firm_age=get_firm_age(),
-        wines=get_group_wines(PATH_XLSX_WINES),
+        wines=get_group_wines(WINES_XLSX_PATH),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
